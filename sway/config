@@ -105,7 +105,7 @@ font pango:Terminus 10
     bindsym $mod+Shift+c reload
 
     # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaymsg exit
+    bindsym $mod+Shift+e exec zenity --question --text="¿Desea cerrar la sesión?" && swaymsg exit
 #
 # Moving around:
 #
