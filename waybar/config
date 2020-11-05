@@ -53,8 +53,8 @@
 
         "custom/addws": {
                 "format": " + ",
-                "on-click": "swaymsg workspace $(swaymsg -t get_workspaces | jq '[ .[] | .name  | tonumber ] | max + 1')",
-                "on-click-right": "swaymsg workspace $(swaymsg -t get_workspaces | jq '[ .[] | .name  | tonumber ] | min - 1')",
+                "on-click": "swaymsg workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber + 1 ')",
+                "on-click-right": "swaymsg workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber - 1 ')",
 		"tooltip": false
         },
 

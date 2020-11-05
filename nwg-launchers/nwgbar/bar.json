@@ -10,6 +10,11 @@
     "icon": "system-log-out"
   },
   {
+    "name": "Suspend",
+    "exec": "systemctl suspend",
+    "icon": "system-suspend"
+  },
+  {
     "name": "Reboot",
     "exec": "systemctl reboot",
     "icon": "system-reboot"
