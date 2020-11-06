@@ -249,7 +249,7 @@ bar {
    swaybar_command waybar
 }
 
-for_window [app_id="zenity"] floating enable, border normal
+for_window [app_id="zenity"] floating enable, border normal, move position cursor
 for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
 for_window [app_id="cal"] floating enable, border normal, resize set 670 704
 for_window [title="Progreso de operación de archivo"] floating enable, border normal, resize set 600 140
