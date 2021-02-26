@@ -67,7 +67,9 @@ exec swayidle -w \
    }
 #
 #
-input * xkb_layout "latam"
+input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "latam"
+input "1452:591:Keychron_K8_Keyboard" xkb_layout "us(intl)"
+
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
@@ -271,7 +273,7 @@ exec mako
 exec blueman-applet
 exec udiskie --no-automount --tray --appindicator
 exec xrdb -load ~/.Xresources
-exec redshift -l 4.68678:-73.9359 -b 1:0.7 -t 6000:4000
+exec redshift -l 4.68678:-73.9359 
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
