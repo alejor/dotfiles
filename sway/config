@@ -265,9 +265,9 @@ focus_follows_mouse yes
 focus_wrapping no
 
 # class                 border    backgr.   text    indicator child_border
-client.focused          #aaaaffcc #63628fee #ffffff #ffffff   #aaaaff
-client.unfocused        #99999944 #13131344  #999999 #ffffff   #99999944
-client.focused_inactive #777777dd #131313dd #aaaaaa #ffffff  #777777dd
+client.focused          #aaaaffcc #606090ee #ffffff #ffffff   #aaaaff
+client.focused_inactive #999999cc #131313ee #aaaaaa #ffffff   #999999cc
+client.unfocused        #777777aa #131313ee #999999 #ffffff   #777777aa
 
 exec mako
 exec blueman-applet
