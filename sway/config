@@ -71,9 +71,13 @@ input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "latam"
 input "1452:591:Keychron_K8_Keyboard" xkb_layout "us(intl)"
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# Read `man 5 sway-inputt` for more information about this section.
 
-font pango:Terminus 10
+font pango:Terminus 8
+titlebar_border_thickness 0
+titlebar_padding 0 0
+for_window [title="."] title_format '<span foreground="#AAAAFF" background="black" > 🙿  %title 🙿  </span>' 
+
 
 ### Key bindings
 #
@@ -265,9 +269,9 @@ focus_follows_mouse yes
 focus_wrapping no
 
 # class                 border    backgr.   text    indicator child_border
-client.focused          #aaaaffcc #606090ee #ffffff #ffffff   #aaaaff
-client.focused_inactive #999999cc #131313ee #aaaaaa #ffffff   #999999cc
-client.unfocused        #777777aa #131313ee #999999 #ffffff   #777777aa
+client.focused          #aaaaffaa #606090ee #ffffff #ffffff   #aaaaff
+client.focused_inactive #999999aa #606090aa #aaaaaa #ffffff   #999999cc
+client.unfocused        #777777aa #131313aa #999999 #ffffff   #777777aa
 
 exec mako
 exec blueman-applet
