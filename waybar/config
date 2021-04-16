@@ -54,8 +54,8 @@
 
         "custom/addws": {
                 "format": " + ",
-                "on-click": "swaymsg workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber + 1 ')",
-                "on-click-right": "swaymsg workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber - 1 ')",
+                "on-click": "~/.config/waybar/ws.sh next",
+                "on-click-right": "~/.config/waybar/ws.sh prev",
 		"tooltip": false
         },
 
