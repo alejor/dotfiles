@@ -7,15 +7,30 @@ import subprocess
 direction=bool(sys.argv[1] == 'next')
 swaymsg = subprocess.run(['swaymsg', '-t', 'get_tree'], stdout=subprocess.PIPE)
 data = json.loads(swaymsg.stdout)
-current = data["nodes"][1]["current_workspace"]
 
-for i in range(len(data["nodes"][1]["nodes"])):
-    if data["nodes"][1]["nodes"][i]["name"] == current :
-        workspace = i
-        break
+def setup():
+    def dig(nodes):
+        if nodes["focused"]:
+            return True
 
-roi = data["nodes"][1]["nodes"][workspace]
-temp = roi
+        for node_type in "nodes", "floating_nodes":
+                if node_type in nodes:
+                    for node in nodes[node_type]:
+                        if node["focused"] or dig(node):
+                            return True
+
+        return False
+
+    for monitor in data["nodes"]:
+        for workspace in monitor["nodes"]:
+            if "scratch" in workspace["name"]:
+                continue
+
+            if workspace["focused"] or dig(workspace):
+                return workspace
+
+workspace = setup()
+temp = workspace
 windows = list()
 
 def getNextWindow():
@@ -33,12 +48,13 @@ def getPrevWindow():
         return len(windows)-1
 
 def makelist(temp):
-  for nodes in "floating_nodes", "nodes":
-    for i in range(len(temp[nodes])):
-        if temp[nodes][i]["name"] is None:
-           makelist(temp[nodes][i])
-        else:
-           windows.append(temp[nodes][i])
+    for nodes in "floating_nodes", "nodes":
+        for i in range(len(temp[nodes])):
+            if temp[nodes][i]["name"] is None:
+               makelist(temp[nodes][i])
+            else:
+               windows.append(temp[nodes][i])
+
 
 def focused(temp_win):
 
@@ -46,7 +62,7 @@ def focused(temp_win):
         if temp_win[i]["focused"] == True:
            return i
     
-    return 9;
+    return 9
 
 makelist(temp)
 focus = focused(windows)
@@ -58,3 +74,5 @@ else:
 
 sway = subprocess.run(['swaymsg', attr, 'focus'])
 sys.exit(sway.returncode)
+
+
