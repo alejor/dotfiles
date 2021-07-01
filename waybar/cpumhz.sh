@@ -1,2 +1,2 @@
 #!/bin/zsh
-lscpu | grep 'CPU MHz:' | cut -f 2 -d ':' | tr -d ' ' | cut -f 1 -d '.' && echo 'CPU Frequency'
+cat /proc/cpuinfo | grep MHz | cut -d ':' -f 2 | dc -e "0d[?+2z>a]salax8/p" && echo 'CPU Frequency'

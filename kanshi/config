@@ -3,6 +3,6 @@ profile default {
 }
 
 profile twomon {
-  output eDP-1 mode 1920x1080 position 0,1080
   output HDMI-A-1 mode 1920x1080 position 0,0
+  output eDP-1 mode 1920x1080 position 1920,0
 }
