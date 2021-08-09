@@ -79,7 +79,8 @@ input "1452:591:Keychron_K8_Keychron_K8" xkb_options "grp:rctrl_switch"
 font pango:Terminus 8
 titlebar_border_thickness 0
 titlebar_padding 0 0
-for_window [title="."] title_format '<span foreground="#AAAAFF" background="black" > 🙿  %title 🙿  </span>' 
+title_align center
+for_window [title="."] title_format '<span background="black"> %title </span>'
 
 for_window [app_id="firefox"] inhibit_idle fullscreen
 
@@ -97,7 +98,7 @@ for_window [app_id="firefox"] inhibit_idle fullscreen
     bindsym $mod+q kill
     # start your launcher
     bindsym $mod+d exec $menu
-    bindsym $mod+x exec wofi
+    bindsym $mod+x exec wofi --show=drun --lines=5 --prompt=""
     bindsym $mod+Shift+z exec $term -e ranger 
     bindsym $mod+n exec mousepad
     bindsym $mod+z exec thunar
@@ -193,7 +194,7 @@ bindsym Mod1+shift+tab exec ~/.config/sway/alttab prev
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen 
-    bindsym button2 kill
+    bindsym button2 exec wl-copy --primary --clear, kill
     bindsym button3 border pixel 2 
     bindsym button6 exec swaymsg move workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber - 1 ')
     bindsym button7 exec swaymsg move workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber + 1 ')
@@ -264,6 +265,9 @@ for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
 for_window [app_id="cal"] floating enable, border normal, resize set 768 780
 for_window [title="Progreso de las operaciones de archivo"] floating enable, border normal, resize set 600 140
 
+for_window [app_id="wofi"] border none, mark --add wofi
+
+
 default_border pixel 2
 hide_edge_borders smart
 gaps inner 4
@@ -273,9 +277,9 @@ focus_follows_mouse yes
 focus_wrapping no
 
 # class                 border    backgr.   text    indicator child_border
-client.focused          #aaaaffaa #606090ee #ffffff #ffffff   #aaaaff
-client.focused_inactive #999999aa #606090aa #aaaaaa #ffffff   #999999cc
-client.unfocused        #777777aa #131313aa #999999 #ffffff   #777777aa
+client.focused          #aaaaffaa #406090aa #ffffff #ffffff   #aaaaff
+client.focused_inactive #999999aa #40609077 #aaaaaa #ffffff   #999999cc
+client.unfocused        #777777aa #13131377 #999999 #ffffff   #777777aa
 
 exec mako
 exec blueman-applet

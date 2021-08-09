@@ -1,5 +1,5 @@
 {
-	"layer": "top", // Waybar at top layer
+	"layer": "bottom", // Waybar at top layer
 	// "position": "bottom", // Waybar position (top|bottom|left|right)
 	"height": 26, // Waybar height (to be removed for auto height)
 	// "width": 1280, // Waybar width
@@ -106,7 +106,7 @@
 		"format-disconnected": "Disconnected ⚠",
 		"format-alt": "{ifname}: {ipaddr}/{cidr}",
 		"interval": 5,
-		"on-click-middle": "netctl-auto switch-to $( netctl-auto list | grep -v -e \"\\!\" -e \"\\*\" | wofi --dmenu )",
+		"on-click-middle": "netctl-auto switch-to $( netctl-auto list | grep -v -e \"\\!\" -e \"\\*\" | wofi --dmenu --lines=5 --prompt=\"Known WiFi Networks\")",
                 "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
 		"tooltip": false
 	},
