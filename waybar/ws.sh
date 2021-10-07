@@ -17,7 +17,7 @@ if [ $1 == "next" ]; then
 	      echo $WORKSPACE_OTH_OUT | grep -q $TO_WORKSPACE &> /dev/null
 	do
 	    echo exists
-            TO_WORKSPACE=$(expr $TO_WORKSPACE + 1)
+            TO_WORKSPACE=$(expr $TO_WORKSPACE + 2)
 	    echo $TO_WORKSPACE
     done
 fi
@@ -26,7 +26,7 @@ if [ $1 == "prev" ]; then
 	      echo $WORKSPACE_OTH_OUT | grep -q $TO_WORKSPACE &> /dev/null
 	do
 	    echo exists
-            TO_WORKSPACE=$(expr $TO_WORKSPACE - 1)
+            TO_WORKSPACE=$(expr $TO_WORKSPACE - 2)
 	    echo $TO_WORKSPACE
     done
 fi

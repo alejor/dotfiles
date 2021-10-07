@@ -1,30 +1,13 @@
 {
-	"layer": "bottom", // Waybar at top layer
-	// "position": "bottom", // Waybar position (top|bottom|left|right)
-	"height": 26, // Waybar height (to be removed for auto height)
-	// "width": 1280, // Waybar width
-
-	// Choose the order of the modules
+	"layer": "bottom", 
+	"height": 26, 
 	"modules-left": ["custom/menu" ,"sway/workspaces", "custom/addws", "sway/mode", "sway/window"],
 	"modules-center": ["custom/mpd"],
 	"modules-right": ["network", "temperature", "cpu", "custom/cpu_mhz", "memory", "backlight", "pulseaudio", "battery", "clock", "idle_inhibitor", "tray", "custom/logout" ],
 
-	// Modules configuration
         "sway/workspaces": {
 	"disable-scroll": false,
 	"enable-bar-scroll": false,
-	// 	"all-outputs": true,
-	// 	"format": "{name}: {icon}",
-	// 	"format-icons": {
-	// 		"1": "",
-	// 		"2": "",
-	// 		"3": "",
-	// 		"4": "",
-	// 		"5": "",
-	// 		"urgent": "",
-	// 		"focused": "",
-	// 		"default": ""
-	// 	}
 	},
 	"sway/mode": {
 		"format": "{}",
@@ -106,7 +89,7 @@
 		"format-disconnected": "Disconnected ⚠",
 		"format-alt": "{ifname}: {ipaddr}/{cidr}",
 		"interval": 5,
-		"on-click-middle": "netctl-auto switch-to $( netctl-auto list | grep -v -e \"\\!\" -e \"\\*\" | wofi --dmenu --lines=5 --prompt=\"Known WiFi Networks\")",
+		"on-click-middle": "swaymsg exec iwdgui",
                 "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
 		"tooltip": false
 	},

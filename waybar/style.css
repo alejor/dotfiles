@@ -34,6 +34,11 @@ window#waybar.solo {
     color: #999999;
 }
 
+#workspaces button.visible {
+    color: #ffffff;
+    background-color: #333333;
+    border-bottom: 2px solid #7700aa;
+}
 #workspaces button.focused {
     color: #ffffff;
     background-color: #333333;

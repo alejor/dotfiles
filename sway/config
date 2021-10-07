@@ -26,7 +26,8 @@ set $menu bemenu-run -n --fn 'Terminus 12'  | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #output * bg /home/neko/Downloads/driving-perfection-hd-wallpaper.jpg fill
-output * bg /home/neko/.config/sway/bg.jpg fill
+output eDP-1 bg /home/neko/.config/sway/bgeDP.jpg fill
+output HDMI-A-1 bg /home/neko/.config/sway/bgHDMI.jpg fill
 #
 # Example configuration:
 #
@@ -68,10 +69,10 @@ exec swayidle -w \
 #
 #
 input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "latam"
-input "1452:591:Keychron_K8_Keyboard" xkb_layout "us,latam" 
-input "1452:591:Keychron_K8_Keyboard" xkb_options "grp:rctrl_switch"
+input "1452:591:Keychron_K8" xkb_layout "us,latam" 
+input "1452:591:Keychron_K8" xkb_options "grp:switch"
 input "1452:591:Keychron_K8_Keychron_K8" xkb_layout "us,latam"
-input "1452:591:Keychron_K8_Keychron_K8" xkb_options "grp:rctrl_switch"
+input "1452:591:Keychron_K8_Keychron_K8" xkb_options "grp:switch"
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-inputt` for more information about this section.
@@ -175,6 +176,17 @@ bindsym $mod+Shift+tab workspace prev_on_output
 bindsym Mod1+tab exec ~/.config/sway/alttab next
 bindsym Mod1+shift+tab exec ~/.config/sway/alttab prev
 
+workspace 1  output eDP-1 
+workspace 2  output HDMI-A-1
+workspace 3  output eDP-1 
+workspace 4  output HDMI-A-1
+workspace 5  output eDP-1 
+workspace 6  output HDMI-A-1
+workspace 7  output eDP-1 
+workspace 8  output HDMI-A-1
+workspace 9  output eDP-1 
+workspace 10  output HDMI-A-1
+
 #
 # Layout stuff:
 #
@@ -262,6 +274,7 @@ bar {
 
 for_window [app_id="zenity"] floating enable, border normal, move position cursor
 for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
+for_window [app_id="iwdgui"] floating enable, border normal, resize set 464 603
 for_window [app_id="cal"] floating enable, border normal, resize set 768 780
 for_window [title="Progreso de las operaciones de archivo"] floating enable, border normal, resize set 600 140
 
@@ -285,17 +298,17 @@ exec mako
 exec blueman-applet
 exec udiskie --no-automount --tray --appindicator
 exec xrdb -load ~/.Xresources
-exec redshift -l 4.68678:-73.9359 
+exec wlsunset -l 4.6 -L -73.9 
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc-Dark'
     gsettings set $gnome-schema icon-theme 'Arc'
 }
- bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym Shift+Mod1+4 exec grim -c -g "$(slurp)" -t png - | tee "/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym $mod+Print exec grim -c - | tee "/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym $mod+Shift+Mod1+4 exec grim -c - | tee "/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
+ bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
+ bindsym Shift+Mod1+4 exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
+ bindsym $mod+Print exec grim -c - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
+ bindsym $mod+Shift+Mod1+4 exec grim -c - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
 
  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
  bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
