@@ -305,10 +305,10 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc-Dark'
     gsettings set $gnome-schema icon-theme 'Arc'
 }
- bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym Shift+Mod1+4 exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym $mod+Print exec grim -c - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
- bindsym $mod+Shift+Mod1+4 exec grim -c - | tee "/var/tmp/screenshot_$(date +%s).png" | wl-copy -t image/png
+ bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
+ bindsym Shift+Mod1+4 exec grim -c -g "$(slurp)" -t png - | tee "/var/tmp/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
+ bindsym $mod+Print exec grim -c -g "$(slurp)" -t png - | swappy -f - -o - | tee "/var/tmp/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
+ bindsym $mod+Shift+Mod1+4 exec grim -c -g "$(slurp)" -t png - | swappy -f - -o - | tee "/var/tmp/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
 
  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
  bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
