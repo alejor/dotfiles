@@ -300,6 +300,9 @@ exec udiskie --no-automount --tray --appindicator
 exec xrdb -load ~/.Xresources
 exec wlsunset -l 4.6 -L -73.9 
 
+exec wl-paste -t text --watch clipman store
+bindsym $mod+h exec clipman pick -t wofi
+
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc-Dark'
