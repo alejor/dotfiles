@@ -2,19 +2,19 @@
 	"layer": "bottom", 
 	"height": 26, 
 	"modules-left": ["custom/menu" ,"sway/workspaces", "custom/addws", "sway/mode", "sway/window"],
-	"modules-center": ["custom/mpd"],
-	"modules-right": ["network", "temperature", "cpu", "custom/cpu_mhz", "memory", "backlight", "pulseaudio", "battery", "clock", "idle_inhibitor", "tray", "custom/logout" ],
-
-        "sway/workspaces": {
-	"disable-scroll": false,
-	"enable-bar-scroll": false,
+	"modules-center": ["custom/mpd","network"],
+	"modules-right": ["temperature", "cpu", "custom/cpu_mhz", "memory", "backlight", "pulseaudio", "battery", "clock", "sway/language", "idle_inhibitor", "tray", "custom/logout" ],
+  "sway/workspaces": {
+    "disable-scroll": false,
+    "enable-bar-scroll": false
 	},
 	"sway/mode": {
 		"format": "{}",
 		"tooltip": false 
 	},
-        "sway/window": {
-		"tooltip": false 
+  "sway/window": {
+		"icon": false,
+		"tooltip": false
 	},
         "custom/mpd": {
                 "format": " {}",
@@ -30,7 +30,7 @@
 		"tooltip": true
         },
         "custom/menu": {
-                "format": "  ",
+                "format": " A ",
                 "on-click": "swaymsg exec 'nwggrid -p -f'",
 		"tooltip": false
         },
@@ -83,26 +83,26 @@
 		"tooltip": false 
 	},
 	"network": {
-		"format-wifi": "<span color='#589df6'></span> <span color='gray'>{essid}</span> {frequency} <span color='#589df6'>{signaldBm} dB</span> <span color='#589df6'>⇵</span> {bandwidthUpBits}/{bandwidthDownBits}",
+                "interface": "wlan0",
+		"format-wifi": "<span>{essid}</span> <span color='#FF00FF'>{signaldBm} dBm</span> <span color='#FFFF00'>U {bandwidthUpBits}</span> <span color='#00FFFF'>D {bandwidthDownBits}</span>",
 		"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
 		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
 		"interval": 5,
-		"on-click-middle": "swaymsg exec iwdgui",
+		"on-click": "",
+		"on-click-middle": "iwctl station wlan0 scan ; swaymsg exec iwdgui",
                 "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
-		"tooltip": false
+		"tooltip": true
 	},
 	"backlight": {
-		// "device": "acpi_video1",
 		"format": "{icon} {percent}%",
-		"format-icons": ["", "", ""],
+                "format-icons": ["", "", ""],
                 "on-scroll-down": "light -U 1",
                 "on-scroll-up": "light -A 1"
  
 	},
 	"pulseaudio": {
-		// "scroll-step": 1, // %, can be a float
 		"format": "{icon} {volume}% {format_source}",
 		"format-muted": " {format_source}",
 		"format-bluetooth": "{icon}  {volume}% {format_source}",
@@ -132,7 +132,7 @@
 		"tooltip": false 
 	},
 	"battery": {
-                "bat": "BAT0",
+                "bat": "BAT1",
 		"states": {
 			"good": 95,
 			"warning": 20,
@@ -141,8 +141,6 @@
 		"format": "<span color='#e88939'>{icon}</span> {capacity}% ({time})",
 		"format-charging": "<span color='#e88939'>{icon} </span> {capacity}%",
 		"format-plugged":  "<span color='#e88939'>{icon}  </span> {capacity}%",
-		// "format-good": "", // An empty format will hide the module
-		// "format-full": "",
 		"format-icons": ["", "", "", "", ""],
 		"tooltip": true 
 	},
@@ -155,13 +153,15 @@
 		"on-click-right": "swaylock -f"
 	},
 	"tray": {
-		// "icon-size": 21,
 		"spacing": 10
 	},
+        "sway/language": {
+            "format": "{}"
+        },
         "mpd": {
         "tooltip": true,
         "max-length": 45,
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {title}",
         "format-disconnected": "Disconnected ",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
         "unknown-tag": "N/A",

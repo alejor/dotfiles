@@ -22,18 +22,18 @@ button:focus {
     background: none;
     border-color: #999;
     color: #ccc;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 20px
 }
 
 #separator {
     background-color: rgba(200, 200, 200, 0.5);
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 500px;
+    margin-right: 500px;
     margin-top: 10px;
     margin-bottom: 10px
 }
 
 #description {
-    margin-bottom: 50px
+    margin-bottom: 20px
 }

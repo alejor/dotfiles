@@ -68,12 +68,14 @@ window#waybar.solo {
 #pulseaudio,
 #tray,
 #mode,
+#language,
 #idle_inhibitor {
     padding: 0 5px;
     margin: 0 4px;
     background-color: transparent;
     border-bottom: 1px solid #8000ff;
     color: #ffffff;
+    font-size: 12px;
 }
 
 #mode {
@@ -89,8 +91,9 @@ label:hover {
 #battery,
 #custom-cpu_mhz,
 #custom-mpd,
+#language,
 #mpd {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 #network.disconnected {

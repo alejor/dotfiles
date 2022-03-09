@@ -1,2 +1,2 @@
 #!/bin/zsh
-cat /proc/cpuinfo | grep MHz | cut -d ':' -f 2 | dc -e "0d[?+2z>a]salax8/p" && echo 'CPU Frequency'
+cat /sys/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_cur_freq| dc -e "0d[?+2z>a]salax12000/p" && echo 'CPU Frequency'
