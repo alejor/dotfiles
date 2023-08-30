@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 NUM_OUTPUTS=$(swaymsg -t get_outputs | jq '.| length')
 CUR_OUTPUT=$(swaymsg -t get_outputs | jq -r ".[] | select(.focused).name")
 CUR_WORKSPACE=$(swaymsg -t get_workspaces | jq -r ".[] | select(.focused).num")

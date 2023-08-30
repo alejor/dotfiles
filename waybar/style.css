@@ -1,8 +1,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Terminus";
-    font-size: 14px;
+    font-family: FontAwesome, Droid Sans;
+    font-size: 12;
     min-height: 0;
 }
 
@@ -48,7 +48,6 @@ window#waybar.solo {
 #workspaces button.urgent {
     background-color: #eb4d4b;
 }
-
 #clock,
 #window,
 #mpd,
@@ -57,11 +56,12 @@ window#waybar.solo {
 #custom-vpn,
 #custom-battery,
 #custom-menu,
+#custom-notes,
+#custom-notification,
 #custom-addws,
 #custom-logout,
 #custom-mpd,
 #cpu,
-#custom-cpu_mhz,
 #memory,
 #backlight,
 #network,
@@ -71,11 +71,18 @@ window#waybar.solo {
 #language,
 #idle_inhibitor {
     padding: 0 5px;
+    color: #ffffff;
     margin: 0 4px;
     background-color: transparent;
     border-bottom: 1px solid #8000ff;
-    color: #ffffff;
-    font-size: 12px;
+}
+
+#language {
+  min-width: 4em;
+}
+
+#clock {
+  font-family: "OCRB";
 }
 
 #mode {
@@ -89,7 +96,8 @@ label:hover {
 
 #network,
 #battery,
-#custom-cpu_mhz,
+#cpu,
+#memory,
 #custom-mpd,
 #language,
 #mpd {
@@ -119,6 +127,12 @@ label:hover {
 #window {
   padding: 0 15px;
   border-bottom: 1px solid #ffffff;
+}
+
+#custom-notes {
+  border-bottom: 1px solid #ffffaa;
+  font-size: 13;
+  font-family: FontAwesome, Iosevka;
 }
 
 #custom-mpd,

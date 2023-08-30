@@ -1,193 +1,524 @@
+[{
+  "bar_id": "bar-0",
+  "backlight": {
+    "format": "{icon}<span color='#fff'>  {percent}%</span>",
+    "format-icons": [
+      "<span color='#777'>󰳲</span>",
+      "<span color='#77A'>󰳲</span>",
+      "<span color='#77F'>󰳲</span>",
+      "<span color='#7FF'>󰳲</span>"
+    ],
+    "tooltip": false,
+    "on-click-right": "~/.config/sway/oled_off.sh command off",
+    "on-click": "~/.config/sway/oled_off.sh command on",
+    "on-scroll-down": "light -U 0.25",
+    "on-scroll-up": "light -A 0.25"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "format": "<span color='#ffa' >{icon} {capacity}% {time}</span>",
+    "format-charging": "<span color='#faa' >{icon} 󰂄 {capacity}%</span>",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "format-plugged": "<span color='#fff'>{icon}  {capacity}%</span>",
+    "states": {
+      "critical": 10,
+      "good": 95,
+      "warning": 20
+    },
+    "tooltip": true
+  },
+  "clock": {
+    "format": "{:%r}",
+    "format-alt": "{:%x}",
+    "interval": 1,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "cpu": {
+      "format": " {load} <span color='#f22'>  </span>{avg_frequency}",
+    "on-click-right": "foot glances",
+    "interval": 5,
+    "tooltip": true
+  },
+  "custom/addws": {
+    "format": " + ",
+    "on-click": "~/.config/waybar/ws.sh next",
+    "on-click-right": "~/.config/waybar/ws.sh prev",
+    "tooltip": false
+  },
+  "custom/logout": {
+    "format": "  ",
+    "on-click": "swaymsg exec nwg-bar",
+    "tooltip": false
+  },
+  "custom/menu": {
+    "format": " A ",
+    "on-click": "swaymsg exec 'nwg-menu -d -va top'",
+    "tooltip": false
+  },
+  "custom/mpd": {
+    "exec": "~/.config/waybar/mpd.sh status",
+    "exec-if": "pgrep playerctld",
+    "format": " {}",
+    "interval": 1,
+    "return-type": "json",
+    "escape": true,
+    "max-length": 45,
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl shuffle toggle",
+    "on-click-right": "~/.config/waybar/mpd.sh player",
+    "on-scroll-down": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "tooltip": true
+  },
+  "custom/notes": {
+    "exec": "~/.config/waybar/notes.sh getnote",
+    "format": "<span color='#ffa'> {} </span>",
+    "on-click": "~/.config/waybar/notes.sh setnote",
+    "on-click-middle": "~/.config/waybar/notes.sh nyaaa",
+    "on-click-right": "mousepad ~/notes",
+    "on-scroll-down": "",
+    "on-scroll-up": "",
+    "interval": 10,
+    "tooltip": true
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{} {icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "height": 26,
+  "idle_inhibitor": {
+    "format": "<span >{icon}</span>",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "on-click-right": "swaylock -f"
+  },
+  "layer": "bottom",
+  "memory": {
+    "format": " {used:0.1f}G",
+    "on-click-right": "foot glances",
+    "tooltip": false
+  },
+  "modules-center": [
+    "custom/notes",
+    "custom/mpd",
+    "network"
+  ],
+  "modules-left": [
+    "custom/menu",
+    "sway/workspaces",
+    "custom/addws",
+    "sway/mode",
+    "sway/window"
+  ],
+  "modules-right": [
+    "sway/language",
+    "temperature",
+    "cpu",
+    "memory",
+    "backlight",
+    "battery",
+    "pulseaudio",
+    "clock",
+    "idle_inhibitor",
+    "tray",
+    "custom/notification",
+    "custom/logout"
+  ],
+  "mpd": {
+    "consume-icons": {
+      "on": " "
+    },
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {title}",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "interval": 1,
+    "max-length": 45,
+    "on-click": "mpc toggle",
+    "on-click-middle": "mpc random",
+    "on-click-right": "foot ncmpcpp",
+    "on-scroll-down": "mpc next",
+    "on-scroll-up": "mpc prev",
+    "random-icons": {
+      "off": "<span ></span> ",
+      "on": "<span ></span> "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "<span ></span>",
+      "playing": "<span ></span>"
+    },
+    "timeout": 1200,
+    "tooltip": true,
+    "unknown-tag": "N/A"
+  },
+  "network": {
+    "format-disconnected": "Disconnected ⚠",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-wifi": "{icon}  {essid}",
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "interface": "wlan0",
+    "interval": 5,
+    "on-click": "",
+    "on-click-middle": "killall iwgtk; iwctl station wlan0 scan ; swaymsg exec iwgtk",
+    "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
+    "tooltip": true,
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} <span color='#FF00FF'>{signaldBm} dBm</span> <span color='#FFFF00'>U {bandwidthUpBits}</span> <span color='#00FFFF'>D {bandwidthDownBits}</span>"
+  },
+  "output": "ViewSonic Corporation VA2246 Series V1W184604799",
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": "  {format_source}",
+    "format-icons": {
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ],
+      "handsfree": "Hf",
+      "headphones": "",
+      "headset": "Spk",
+      "phone": "",
+      "portable": ""
+    },
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "on-click": "pulsemixer --toggle-mute",
+    "on-click-right": "foot pulsemixer",
+    "tooltip": true
+  },
+  "sway/language": {
+    "format": "⌨ {}"
+  },
+  "sway/mode": {
+    "format": "{}",
+    "tooltip": false
+  },
+  "sway/window": {
+    "icon": false,
+    "tooltip": true,
+    "on-scroll-up": "swaymsg exec ~/.config/sway/alttab prev",
+    "on-scroll-down": "swaymsg exec ~/.config/sway/alttab next",
+    "on-click-middle": "swaymsg kill"
+  },
+  "sway/workspaces": {
+    "disable-scroll": false,
+//    "all-outputs": true,
+    "enable-bar-scroll": false
+  },
+  "temperature": {
+    "critical-threshold": 70,
+    "thermal-zone": 8,
+    "format": "{icon} {temperatureC}°C",
+    "format-critical": "<span color='#ffff00'>ALERTA! {icon}</span> {temperatureC}°C",
+    "format-icons": [
+      "<span color='#3333ff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaaa'></span>",
+      "<span color='#aaaaaa'></span>",
+      "<span color='#ffff00'></span>",
+      "<span color='#ffaa00'></span>",
+    ],
+    "on-click-right": "swaymsg exec GDK_BACKEND=x11 psensor"
+  },
+  "tray": {
+    "spacing": 10
+  }
+},
 {
-	"layer": "bottom", 
-	"height": 26, 
-	"modules-left": ["custom/menu" ,"sway/workspaces", "custom/addws", "sway/mode", "sway/window"],
-	"modules-center": ["custom/mpd","network"],
-	"modules-right": ["temperature", "cpu", "custom/cpu_mhz", "memory", "backlight", "pulseaudio", "battery", "clock", "sway/language", "idle_inhibitor", "tray", "custom/logout" ],
+  "bar_id": "bar-1",
+  "ipc": true,
+  "backlight": {
+    "format": "{icon}<span color='#fff'>  {percent}%</span>",
+    "format-icons": [
+      "<span color='#777'>󰳲</span>",
+      "<span color='#77A'>󰳲</span>",
+      "<span color='#77F'>󰳲</span>",
+      "<span color='#7FF'>󰳲</span>"
+    ],
+    "tooltip": false,
+    "on-scroll-down": "light -U 0.25",
+    "on-scroll-up": "light -A 0.25"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "format": "<span color='#ffa' >{icon} {capacity}% {time}</span>",
+    "format-charging": "<span color='#faa' >{icon} 󰂄 {capacity}%</span>",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "format-plugged": "<span color='#fff'>{icon}  {capacity}%</span>",
+    "states": {
+      "critical": 10,
+      "good": 95,
+      "warning": 20
+    },
+    "tooltip": true
+  },
+  "clock": {
+    "format": "{:%r}",
+    "format-alt": "{:%x}",
+    "interval": 1,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "cpu": {
+      "format": " {load} <span color='#f22'>  </span>{avg_frequency}",
+    "on-click-right": "foot glances",
+    "interval": 5,
+    "tooltip": true
+  },
+  "custom/addws": {
+    "format": " + ",
+    "on-click": "~/.config/waybar/ws.sh next",
+    "on-click-right": "~/.config/waybar/ws.sh prev",
+    "tooltip": false
+  },
+  "custom/logout": {
+    "format": "  ",
+    "on-click": "swaymsg exec nwg-bar",
+    "tooltip": false
+  },
+  "custom/menu": {
+    "format": " A ",
+    "on-click": "swaymsg exec 'nwg-menu -d -va top -mt 26'",
+    "tooltip": false
+  },
+  "custom/mpd": {
+    "exec": "~/.config/waybar/mpd.sh status",
+    "exec-if": "pgrep playerctld",
+    "format": " {}",
+    "interval": 1,
+    "return-type": "json",
+    "escape": true,
+    "max-length": 45,
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl shuffle toggle",
+    "on-click-right": "~/.config/waybar/mpd.sh player",
+    "on-scroll-down": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "tooltip": true
+  },
+  "custom/notes": {
+    "exec": "~/.config/waybar/notes.sh getnote",
+    "format": "<span color='#ffa'> {} </span>",
+    "on-click": "~/.config/waybar/notes.sh setnote",
+    "on-click-middle": "~/.config/waybar/notes.sh nyaaa",
+    "on-click-right": "mousepad ~/notes",
+    "on-scroll-down": "",
+    "on-scroll-up": "",
+    "interval": 10,
+    "tooltip": true
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{} {icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "height": 26,
+  "idle_inhibitor": {
+    "format": "<span >{icon}</span>",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "on-click-right": "swaylock -f"
+  },
+  "layer": "top",
+  "memory": {
+    "format": " {used:0.1f}G",
+    "on-click-right": "foot glances",
+    "tooltip": false
+  },
+  "modules-center": [
+    "custom/notes",
+    "custom/mpd",
+    "network"
+  ],
+  "modules-left": [
+    "custom/menu",
+    "sway/workspaces",
+    "custom/addws",
+    "sway/mode",
+    "sway/window"
+  ],
+  "modules-right": [
+    "sway/language",
+    "temperature",
+    "cpu",
+    "memory",
+    "backlight",
+    "battery",
+    "pulseaudio",
+    "clock",
+    "idle_inhibitor",
+    "tray",
+    "custom/notification",
+    "custom/logout"
+  ],
+  "mpd": {
+    "consume-icons": {
+      "on": " "
+    },
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {title}",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "interval": 1,
+    "max-length": 45,
+    "on-click": "mpc toggle",
+    "on-click-middle": "mpc random",
+    "on-click-right": "foot ncmpcpp",
+    "on-scroll-down": "mpc next",
+    "on-scroll-up": "mpc prev",
+    "random-icons": {
+      "off": "<span ></span> ",
+      "on": "<span ></span> "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "<span ></span>",
+      "playing": "<span ></span>"
+    },
+    "timeout": 1200,
+    "tooltip": true,
+    "unknown-tag": "N/A"
+  },
+  "network": {
+    "format-disconnected": "Disconnected ⚠",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-wifi": "{icon}  {essid}",
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "interface": "wlan0",
+    "interval": 5,
+    "on-click": "",
+    "on-click-middle": "killall iwgtk; iwctl station wlan0 scan ; swaymsg exec iwgtk",
+    "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
+    "tooltip": true,
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} <span color='#FF00FF'>{signaldBm} dBm</span> <span color='#FFFF00'>U {bandwidthUpBits}</span> <span color='#00FFFF'>D {bandwidthDownBits}</span>"
+  },
+  "output": "eDP-1",
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": "  {format_source}",
+    "format-icons": {
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ],
+      "handsfree": "Hf",
+      "headphones": "",
+      "headset": "Spk",
+      "phone": "",
+      "portable": ""
+    },
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "on-click": "pulsemixer --toggle-mute",
+    "on-click-right": "foot pulsemixer",
+    "tooltip": true
+  },
+  "sway/language": {
+    "format": "⌨ {}"
+  },
+  "sway/mode": {
+    "format": "{}",
+    "tooltip": false
+  },
+  "sway/window": {
+    "icon": false,
+    "tooltip": true,
+    "on-scroll-up": "swaymsg exec ~/.config/sway/alttab prev",
+    "on-scroll-down": "swaymsg exec ~/.config/sway/alttab next",
+    "on-click-middle": "swaymsg kill"
+  },
   "sway/workspaces": {
     "disable-scroll": false,
     "enable-bar-scroll": false
-	},
-	"sway/mode": {
-		"format": "{}",
-		"tooltip": false 
-	},
-  "sway/window": {
-		"icon": false,
-		"tooltip": false
-	},
-        "custom/mpd": {
-                "format": " {}",
-                "max-length": 45,
-                "interval": 3,
-		"exec": "~/.config/waybar/mpd.sh",
-		"exec-if": "pgrep mpd",
-                "on-click": "mpc toggle",
-                "on-click-middle": "mpc random",
-                "on-scroll-down": "mpc next",
-        	"on-scroll-up": "mpc prev",
-        	"on-click-right": "foot ncmpcpp",
-		"tooltip": true
-        },
-        "custom/menu": {
-                "format": " A ",
-                "on-click": "swaymsg exec 'nwggrid -p -f'",
-		"tooltip": false
-        },
-
-        "custom/addws": {
-                "format": " + ",
-                "on-click": "~/.config/waybar/ws.sh next",
-                "on-click-right": "~/.config/waybar/ws.sh prev",
-		"tooltip": false
-        },
-
-
-        "custom/logout": {
-                "format": "  ",
-        	"on-click": "swaymsg exec nwgbar",
-		"tooltip": false
-        },
-	
-	"custom/disk_home": {
-		"format": "/home {} ",
-		"interval": 30,
-		"exec": "df -h --output=avail $HOME | tail -1 | tr -d ' '",
-		"tooltip": false 
-	},
-	"custom/cpu_mhz": {
-		"format": "  {} Mhz",
-		"interval": 7,
-		"exec": "~/.config/waybar/cpumhz.sh",
-		"tooltip": true 
-	},
-        "custom/disk_root": {
-		"format": "/data {} ",
-		"interval": 30,
-		"exec": "df -h --output=avail /data | tail -1 | tr -d ' '"
-	},
-	"temperature": {
-		"critical-threshold": 80,
-                "on-click-right": "swaymsg exec xfce4-sensors",
-		"format": "<span color='#e88939'>{icon}</span> {temperatureC}°C",
-                "format-icons": ["", "", "" ,""]
-	},
-	"cpu": {
-		"format": " {usage}%",
-                "on-click-right": "foot glances",
-		"tooltip": true
-	},
-	"memory": {
-		"format": " {used:0.1f}G",
-                "on-click-right": "foot glances",
-		"tooltip": false 
-	},
-	"network": {
-                "interface": "wlan0",
-		"format-wifi": "<span>{essid}</span> <span color='#FF00FF'>{signaldBm} dBm</span> <span color='#FFFF00'>U {bandwidthUpBits}</span> <span color='#00FFFF'>D {bandwidthDownBits}</span>",
-		"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "Disconnected ⚠",
-		"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-		"interval": 5,
-		"on-click": "",
-		"on-click-middle": "iwctl station wlan0 scan ; swaymsg exec iwdgui",
-                "on-click-right": "foot mtr -n 206.223.124.155 --displaymode 2",
-		"tooltip": true
-	},
-	"backlight": {
-		"format": "{icon} {percent}%",
-                "format-icons": ["", "", ""],
-                "on-scroll-down": "light -U 1",
-                "on-scroll-up": "light -A 1"
- 
-	},
-	"pulseaudio": {
-		"format": "{icon} {volume}% {format_source}",
-		"format-muted": " {format_source}",
-		"format-bluetooth": "{icon}  {volume}% {format_source}",
-		"format-bluetooth-muted": "  {format_source}",
-
-		"format-source": " {volume}%",
-		"format-source-muted": "",
-
-		"format-icons": {
-			"headphones": "",
-			"phone": "",
-                        "handsfree": "Hf",
-                        "headset": "Spk",
-			"portable": "",
-			"car": "",
-			"default": ["", "", ""]
-		},
-		"on-click": "pulsemixer --toggle-mute",
-		"on-click-right": "foot pulsemixer",
-		"tooltip": true 
-	},
-	"clock": {
-		"interval": 1,
-		"format": "{:%r}",
-		"format-alt": "{:%x}",
-                "on-click-right": "foot --app-id=cal --hold cal -SY",
-		"tooltip": false 
-	},
-	"battery": {
-                "bat": "BAT1",
-		"states": {
-			"good": 95,
-			"warning": 20,
-			"critical": 10
-		},
-		"format": "<span color='#e88939'>{icon}</span> {capacity}% ({time})",
-		"format-charging": "<span color='#e88939'>{icon} </span> {capacity}%",
-		"format-plugged":  "<span color='#e88939'>{icon}  </span> {capacity}%",
-		"format-icons": ["", "", "", "", ""],
-		"tooltip": true 
-	},
-	"idle_inhibitor": {
-		"format": "<span color='#589df6'>{icon}</span>",
-		"format-icons": {
-			"activated": "",
-			"deactivated": ""
-		},
-		"on-click-right": "swaylock -f"
-	},
-	"tray": {
-		"spacing": 10
-	},
-        "sway/language": {
-            "format": "{}"
-        },
-        "mpd": {
-        "tooltip": true,
-        "max-length": 45,
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {title}",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "on-scroll-down": "mpc next",
-        "on-scroll-up": "mpc prev",
-        "on-click-right": "foot ncmpcpp",
-        "on-click-middle": "mpc random",
-        "on-click": "mpc toggle",
-        "interval": 1,
-        "timeout": 1200,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": "<span color=\"#3c3cff\"></span> "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "<span color=\"#f53c3c\"></span>",
-            "playing": "<span color=\"#00ff33\"></span>"
-        }
-    }
-}
+  },
+  "temperature": {
+    "critical-threshold": 70,
+    "thermal-zone": 8,
+    "format": "{icon} {temperatureC}°C",
+    "format-critical": "<span color='#ffff00'>ALERTA! {icon}</span> {temperatureC}°C",
+    "format-icons": [
+      "<span color='#3333ff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaff'></span>",
+      "<span color='#aaaaaa'></span>",
+      "<span color='#aaaaaa'></span>",
+      "<span color='#ffff00'></span>",
+      "<span color='#ffaa00'></span>",
+    ],
+    "on-click-right": "swaymsg exec GDK_BACKEND=x11 psensor"
+  },
+  "tray": {
+    "spacing": 10
+  }
+}]

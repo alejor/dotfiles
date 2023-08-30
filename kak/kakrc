@@ -1,0 +1,47 @@
+colorscheme vivendi
+add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
+add-highlighter global/ show-matching
+add-highlighter global/ wrap -word -indent
+set-option global tabstop 2
+set-option global indentwidth 2
+set-option global scrolloff 3,3
+
+map -docstring "yank the selection into the clipboard" global user y "<a-|> wl-copy<ret>"
+map -docstring "paste the clipboard" global user p "<a-!> wl-paste --no-newline<ret>"
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andreyorst/plug.kak" noload
+
+plug "gustavo-hms/luar" %{
+  require-module luar
+}
+
+plug "evanrelf/byline.kak" config %{
+  require-module "byline"
+}
+
+plug "andreyorst/powerline.kak" defer powerline_gruvbox %{
+    powerline-theme gruvbox
+} config %{
+    powerline-start
+}
+hook global InsertCompletionShow .* %{
+  try %{
+    # this command temporarily removes cursors preceded by whitespace; # if there are no cursors left, it raises an error, does not # continue to execute the mapping commands, and the error is eaten # by the `try` command so no warning appears.
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once -always window InsertCompletionHide .* %{
+      unmap window insert <tab> <c-n>
+      unmap window insert <s-tab> <c-p>
+    }
+  }
+}
+
+hook global WinSetOption filetype=yaml %{
+      set-option window lintcmd %{
+        run() {
+           yamllint -f parsable "$1" | sed 's/ \[\(.*\)\] / \1: /'
+      } && run }
+}
+
