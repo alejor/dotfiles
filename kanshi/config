@@ -1,16 +1,9 @@
 profile default {
-  output eDP-1 mode 1920x1080 position 0,0
-  exec sleep 10; killall kanshi
+  output eDP-1 mode 2880x1800 position 0,0
 }
 
 profile twomonV {
-  output 'ViewSonic Corporation VA2246 Series V1W184604799' mode 1920x1080 position 1920,0
-  output eDP-1 mode 1920x1080 position 0,1080
-  exec sleep 10; killall kanshi
+  output 'ViewSonic Corporation VA2246 Series V1W184604799' mode 1920x1080 position 0,0
+  output eDP-1 mode 2880x1800 position 240,1080
 }
 
-profile twomonH {
-  output 'Hewlett Packard Compaq W17q CNC722QWM0' mode 1440x900@75Hz position 1920,0
-  output eDP-1 mode 1920x1080 position 0,0
-  exec sleep 10; killall kanshi
-}

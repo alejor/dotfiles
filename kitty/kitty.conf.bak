@@ -2110,6 +2110,6 @@ map shift+escape discard_event
 
 
 # BEGIN_KITTY_THEME
-# 3024 Night
+# Wizzy Muted
 include current-theme.conf
 # END_KITTY_THEME

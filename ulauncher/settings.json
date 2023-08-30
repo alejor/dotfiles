@@ -1,0 +1,13 @@
+{
+    "clear-previous-query": true,
+    "disable-desktop-filters": false,
+    "grab-mouse-pointer": false,
+    "hotkey-show-app": "null",
+    "jump-keys": "1234567890abcdefghijklmnopqrstuvwxyz",
+    "max-recent-apps": 0,
+    "raise-if-started": false,
+    "render-on-screen": "mouse-pointer-monitor",
+    "show-indicator-icon": false,
+    "terminal-command": "",
+    "theme-name": "dracula"
+}
