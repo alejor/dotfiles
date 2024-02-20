@@ -1,4 +1,4 @@
-# Default config for sway
+#te Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -22,44 +22,29 @@ set $browser firefox
 
 set $menu rofi -show run | xargs swaymsg exec --
 
-set $monitor 'ViewSonic Corporation VA2246 Series V1W184604799'
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-exec kanshi
-exec gammastep -v -l 4.6:-73.9
-exec swww init 
 
-bindsym $mod+Shift+w exec ~/.config/sway/wallpaper.sh 
 
 #
 # Example configuration:
 #
+exec_always kanshictl reload 
 
 output * subpixel rgb
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-seat * hide_cursor 7000
-seat * xcursor_theme Bibata-Modern-Amber 42
+
 
 
 ### Idle configuration
 #
 # Example configuration:
-#
 exec swayidle -w \
-          timeout 30 '~/.config/sway/oled_off.sh timeout off' \
+          timeout 60 '~/.config/sway/oled_off.sh timeout off' \
             resume '~/.config/sway/oled_off.sh timeout on' \
           timeout 600  'swaylock -f' \
           before-sleep 'swaylock -f'
-#
-#          timeout 120 'swaymsg "output * power off"' \
-#             resume 'swaymsg "output * power on"; swaymsg "output * enable"' \
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 #
@@ -75,11 +60,15 @@ exec swayidle -w \
    input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "us,latam"
    input "1:1:AT_Translated_Set_2_keyboard" xkb_options "grp:alt_space_toggle,caps:escape_shifted_capslock"
    input "13364:640:Keychron_K8_Pro_Keyboard" xkb_layout "us,latam"
-   input "13364:640:Keychron_K8_Pro_Keyboard" xkb_options "grp:alt_space_toggle,caps:escape_shifted_capslock"
+   input "13364:640:Keychron_K8_Pro_Keyboard" xkb_options "grp:alt_space_toggle"
    input "13364:640:Keychron_Keychron_K8_Pro" xkb_layout "us,latam" 
-   input "13364:640:Keychron_Keychron_K8_Pro" xkb_options "grp:alt_space_toggle,caps:escape_shifted_capslock"
+   input "13364:640:Keychron_Keychron_K8_Pro" xkb_options "grp:alt_space_toggle"
 
-#     input "1386:890:Wacom_One_by_Wacom_S_Pen" map_to_region 192 0 1728 1080 
+input type:keyboard {
+    repeat_delay 250
+    repeat_rate 40
+}
+
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -111,7 +100,7 @@ for_window [app_id="chromium"] inhibit_idle fullscreen
     bindsym $mod+c exec rofi -modes calc -show calc -no-show-match -no-sort
     bindsym $mod+u exec ulauncher-toggle
     bindsym $mod+Shift+z exec $term -e ranger 
-    bindsym $mod+Shift+m exec foot -e ncmpcpp
+    bindsym $mod+Shift+m exec ~/.config/waybar/mpd.sh player
     bindsym $mod+Shift+p exec foot -e pulsemixer 
     bindsym $mod+n exec mousepad
     bindsym $mod+z exec thunar
@@ -119,7 +108,7 @@ for_window [app_id="chromium"] inhibit_idle fullscreen
     bindsym $mod+Delete exec swaylock -f
 
     bindsym $mod+o exec ~/.config/sway/oled_off.sh toggle
-    bindgesture swipe:down bar hidden_state toggle
+    bindgesture swipe:down bar mode toggle
     bindsym Ctrl+Alt+Tab bar hidden_state toggle 
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -195,6 +184,8 @@ bindsym $mod+home exec ~/.config/waybar/ws.sh prev
 
 bindsym Mod1+tab exec ~/.config/sway/alttab next
 bindsym Mod1+shift+tab exec ~/.config/sway/alttab prev
+
+set $monitor 'ViewSonic Corporation VA2246 Series V1W184604799'
 
 workspace 1  output eDP-1 
 workspace 2  output $monitor
@@ -295,8 +286,9 @@ bar bar-1 {
    hidden_state hide
    mode hide
    modifier Mod4
+   position top
 }
-for_window [app_id="zenity"] floating enable, border normal, move position cursor
+for_window [app_id="zenity"] floating enable, border csd, move position cursor
 for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
 for_window [app_id="psensor"] floating enable, border normal, resize set 1000 600
 for_window [app_id="iwgtk"] floating enable, border normal, resize set 1000 600
@@ -321,18 +313,21 @@ client.focused          #995fedaa #6a43b077 #ffffff #ffffff   #c168ffaa
 client.unfocused        #55555577 #13131377 #999999 #ffffff   #55555577
 client.focused_inactive #995fed77 #6a43b077 #aaaaaa #ffffff   #995fed77
 
-exec_always kanshictl reload
 exec swaync
-bindsym $mod+Shift+n exec swaync-client -t -sw
 
 exec blueman-applet
 exec udiskie --no-automount --tray --appindicator
 exec ulauncher --hide-window
 
 exec wl-paste -t text --watch wlipman store
-bindsym $mod+p exec wlipman pick
 
+exec gammastep -v -l 4.6:-73.9
+exec swww init
 
+bindsym $mod+Shift+w exec ~/.config/sway/wallpaper.sh
+
+ bindsym $mod+p exec wlipman pick
+ bindsym $mod+Shift+n exec swaync-client -t -sw
  bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/home/neko/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
  bindsym $mod+Print exec find /home/neko/screenshots/ -type f | sort -r | xargs imv | tail -n 1 | xargs swappy -f 
  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
@@ -347,4 +342,13 @@ bindsym $mod+p exec wlipman pick
  bindsym XF86MonBrightnessDown exec light -U 0.25
  bindsym XF86MonBrightnessUp exec light -A 0.25
  bindsym XF86TouchpadToggle input 1267:12737:ASUE120C:00_04F3:31C1_Touchpad events toggle enabled disabled
+
+# seat wacom attach 1386:890:Wacom_One_by_Wacom_S_Pen
+# seat wacom xcursor_theme Bibata-Modern-Ice 42
+# seat wacom idle_inhibit tablet_tool
+
+ seat seat0 xcursor_theme Bibata-Modern-Amber 42
+ seat * hide_cursor 7000
+exec kanshi
+exec ~/.config/sway/walltimer.sh 600
 include /etc/sway/config.d/*

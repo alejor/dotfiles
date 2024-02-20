@@ -2,7 +2,7 @@
     "googlesearch": {
         "added": 1682026822,
         "cmd": "https://google.com/search?q=%s",
-        "icon": "/usr/share/ulauncher/icons/google-search.png",
+        "icon": "/usr/share/ulauncher/media/google-search-icon.png",
         "id": "googlesearch",
         "is_default_search": true,
         "keyword": "g",
@@ -12,7 +12,7 @@
     "stackoverflow": {
         "added": 1682026822,
         "cmd": "https://stackoverflow.com/search?q=%s",
-        "icon": "/usr/share/ulauncher/icons/stackoverflow.svg",
+        "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
         "id": "stackoverflow",
         "is_default_search": true,
         "keyword": "so",
@@ -22,7 +22,7 @@
     "wikipedia": {
         "added": 1682026822,
         "cmd": "https://en.wikipedia.org/wiki/%s",
-        "icon": "/usr/share/ulauncher/icons/wikipedia.png",
+        "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
         "id": "wikipedia",
         "is_default_search": true,
         "keyword": "wiki",

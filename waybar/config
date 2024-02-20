@@ -40,7 +40,7 @@
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-      "format": " {load} <span color='#f22'>  </span>{avg_frequency}",
+    "format": " {load}lavg <span color='#f22'>  </span>{avg_frequency}Ghz",
     "on-click-right": "foot glances",
     "interval": 5,
     "tooltip": true
@@ -112,7 +112,7 @@
     },
     "on-click-right": "swaylock -f"
   },
-  "layer": "bottom",
+  "layer": "top",
   "memory": {
     "format": " {used:0.1f}G",
     "on-click-right": "foot glances",
@@ -155,7 +155,7 @@
     "max-length": 45,
     "on-click": "mpc toggle",
     "on-click-middle": "mpc random",
-    "on-click-right": "foot ncmpcpp",
+    "on-click-right": "foot ncmpc",
     "on-scroll-down": "mpc next",
     "on-scroll-up": "mpc prev",
     "random-icons": {
@@ -302,7 +302,7 @@
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-      "format": " {load} <span color='#f22'>  </span>{avg_frequency}",
+    "format": " {load}lavg <span color='#f22'>  </span>{avg_frequency}Ghz",
     "on-click-right": "foot glances",
     "interval": 5,
     "tooltip": true
@@ -320,7 +320,7 @@
   },
   "custom/menu": {
     "format": " A ",
-    "on-click": "swaymsg exec 'nwg-menu -d -va top -mt 26'",
+    "on-click": "if [ `swaymsg -t get_bar_config bar-0 | jq -r .mode` == hide ]; then swaymsg exec 'nwg-menu -d -va top -mt 26'; else swaymsg exec 'nwg-menu -d -va top'; fi",
     "tooltip": false
   },
   "custom/mpd": {
@@ -417,7 +417,7 @@
     "max-length": 45,
     "on-click": "mpc toggle",
     "on-click-middle": "mpc random",
-    "on-click-right": "foot ncmpcpp",
+    "on-click-right": "foot ncmpc",
     "on-scroll-down": "mpc next",
     "on-scroll-up": "mpc prev",
     "random-icons": {

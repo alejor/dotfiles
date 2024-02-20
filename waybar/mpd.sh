@@ -13,7 +13,7 @@ player () {
   if [ "$PLAYER" == "spotifyd" ]; then
     foot -e spt &
   elif [ "$PLAYER" == "mpd" ]; then
-    foot -e ncmpcpp &
+    foot -e ncmpc &
   elif [ "$PLAYER" == "ncspot" ]; then
     foot -e tmux attach-session -t 'ncSpotify'  &
   else

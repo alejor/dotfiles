@@ -1,4 +1,4 @@
-colorscheme vivendi
+colorscheme cyanide
 add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
 add-highlighter global/ show-matching
 add-highlighter global/ wrap -word -indent
@@ -20,8 +20,8 @@ plug "evanrelf/byline.kak" config %{
   require-module "byline"
 }
 
-plug "andreyorst/powerline.kak" defer powerline_gruvbox %{
-    powerline-theme gruvbox
+plug "andreyorst/powerline.kak" defer powerline_zenburn %{
+    powerline-theme zenburn
 } config %{
     powerline-start
 }
@@ -43,5 +43,14 @@ hook global WinSetOption filetype=yaml %{
         run() {
            yamllint -f parsable "$1" | sed 's/ \[\(.*\)\] / \1: /'
       } && run }
+}
+
+define-command -override my-surround-add -params 2 %{
+  evaluate-commands -draft -save-regs '"' %{
+    set-register '"' %arg{1}
+    execute-keys -draft P
+    set-register '"' %arg{2}
+    execute-keys -draft p
+  }
 }
 

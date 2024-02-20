@@ -1,7 +1,17 @@
 #!/bin/bash
+sleep 1
+until (swww query | grep -q eDP-1)
+do
+  echo "Waiting for swww to be ready..."
+  echo "Waiting for eDP-1 to be ready..."
+  sleep 1
+done
 
-monitor=`swaymsg -t get_outputs --raw | jq '. | map(select(.serial == "V1W184604799")) | .[0].name' -r`
-if [ -n $monitor ]; then
-  find ~/wallpapers -type f | shuf -n 1 | xargs swww img -o $monitor
-fi
-find ~/wallpapers -type f | shuf -n 1 | xargs swww img -o eDP-1
+monitors=`swaymsg -t get_outputs --raw | jq '.[].name' -r`
+
+for m in $monitors
+do
+  sleep 1
+  find ~/wallpapers -type f | shuf -n 1 | xargs swww img -o $m
+  sleep 3
+done

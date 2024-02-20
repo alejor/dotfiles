@@ -1,0 +1,7 @@
+[Unit]
+Description=Festival speech synthesis server
+[Service]
+ExecStart=/usr/bin/festival --server
+Type=simple
+[Install]
+WantedBy=default.target
