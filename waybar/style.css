@@ -27,6 +27,7 @@ window#waybar.solo {
 */
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
@@ -55,7 +56,6 @@ window#waybar.solo {
 #temperature,
 #custom-vpn,
 #custom-battery,
-#custom-menu,
 #custom-notes,
 #custom-notification,
 #custom-addws,
@@ -139,4 +139,12 @@ label:hover {
 #mpd {
   color: #777fff;
   border-bottom: 1px solid #ff00ff;
+}
+
+#custom-menu {
+  font-size: 14;
+  padding: 0 5px;
+  color: #ffffff;
+  margin: 0 4px;
+  background-color: transparent;
 }

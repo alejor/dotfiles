@@ -40,7 +40,7 @@
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-    "format": " {load}lavg <span color='#f22'>  </span>{avg_frequency}Ghz",
+    "format": "{load}⏳ <span color='#f22'>  </span>{avg_frequency}㎓",
     "on-click-right": "foot glances",
     "interval": 5,
     "tooltip": true
@@ -57,7 +57,7 @@
     "tooltip": false
   },
   "custom/menu": {
-    "format": " A ",
+    "format": "📔",
     "on-click": "swaymsg exec 'nwg-menu -d -va top'",
     "tooltip": false
   },
@@ -302,7 +302,7 @@
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-    "format": " {load}lavg <span color='#f22'>  </span>{avg_frequency}Ghz",
+    "format": "{load}⏳ <span color='#f22'>  </span>{avg_frequency}㎓",
     "on-click-right": "foot glances",
     "interval": 5,
     "tooltip": true
@@ -319,7 +319,7 @@
     "tooltip": false
   },
   "custom/menu": {
-    "format": " A ",
+    "format": "📔",
     "on-click": "if [ `swaymsg -t get_bar_config bar-0 | jq -r .mode` == hide ]; then swaymsg exec 'nwg-menu -d -va top -mt 26'; else swaymsg exec 'nwg-menu -d -va top'; fi",
     "tooltip": false
   },
