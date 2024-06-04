@@ -218,7 +218,7 @@
     "format-source": " {volume}%",
     "format-source-muted": "",
     "on-click": "pulsemixer --toggle-mute",
-    "on-click-right": "foot pulsemixer",
+    "on-click-right": "pavucontrol",
     "tooltip": true
   },
   "sway/language": {
@@ -233,7 +233,8 @@
     "tooltip": true,
     "on-scroll-up": "swaymsg exec ~/.config/sway/alttab prev",
     "on-scroll-down": "swaymsg exec ~/.config/sway/alttab next",
-    "on-click-middle": "swaymsg kill"
+    "on-click-middle": "swaymsg kill",
+    "on-click-right": "swaymsg border normal, floating toggle, resize set 1000 600"
   },
   "sway/workspaces": {
     "disable-scroll": false,
@@ -480,7 +481,7 @@
     "format-source": " {volume}%",
     "format-source-muted": "",
     "on-click": "pulsemixer --toggle-mute",
-    "on-click-right": "foot pulsemixer",
+    "on-click-right": "pavucontrol",
     "tooltip": true
   },
   "sway/language": {
@@ -495,7 +496,8 @@
     "tooltip": true,
     "on-scroll-up": "swaymsg exec ~/.config/sway/alttab prev",
     "on-scroll-down": "swaymsg exec ~/.config/sway/alttab next",
-    "on-click-middle": "swaymsg kill"
+    "on-click-middle": "swaymsg kill",
+    "on-click-right": "swaymsg border normal, floating toggle, resize set 1000 600"
   },
   "sway/workspaces": {
     "disable-scroll": false,

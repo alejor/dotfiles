@@ -1,5 +1,4 @@
 #!/bin/bash
-~/.config/sway/wallpaper.sh &
 a=$1
 b=$(( a / 2 ))
 while [ $(pgrep -c walltimer.sh) -eq 1 ]

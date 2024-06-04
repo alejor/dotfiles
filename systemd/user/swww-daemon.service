@@ -1,0 +1,10 @@
+[Unit]
+Description=Wallpaper changing
+BindsTo=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=swww-daemon
+
+[Install]
+WantedBy=sway-session.target

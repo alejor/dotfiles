@@ -1,0 +1,10 @@
+[Unit]
+Description=Wallpaper changing every time
+BindsTo=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/neko/.config/sway/walltimer.sh 600
+
+[Install]
+WantedBy=sway-session.target

@@ -18,8 +18,8 @@ declare-option str red 'rgb:D70000'
 declare-option str yellow 'rgb:F1FA8C'
 declare-option str dimgray 'rgb:353535'
 
-declare-option str psel 'rgba:27374780'
-declare-option str ssel 'rgba:1b273380'
+declare-option str psel 'rgba:17479980'
+declare-option str ssel 'rgba:1b277780'
 declare-option str background %opt{black}
 declare-option str dimmed_background %opt{gray}
 declare-option str foreground %opt{white}

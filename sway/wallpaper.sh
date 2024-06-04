@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 1
 until (swww query | grep -q eDP-1)
 do
   echo "Waiting for swww to be ready..."
@@ -11,7 +10,5 @@ monitors=`swaymsg -t get_outputs --raw | jq '.[].name' -r`
 
 for m in $monitors
 do
-  sleep 1
-  find ~/wallpapers -type f | shuf -n 1 | xargs swww img -o $m
-  sleep 3
+  echo "Changing wallpaper in $m" && find ~/wallpapers -type f | shuf -n 1 | xargs swww img -o $m --transition-step 16 --transition-fps 16 &
 done

@@ -1,191 +1,51 @@
-#te Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
 set $term kitty
 set $browser firefox
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-
 set $menu rofi -show run | xargs swaymsg exec --
-
-
-
-
-#
-# Example configuration:
-#
-exec_always kanshictl reload 
+set $monitor 'ViewSonic Corporation VA2246 Series V1W184604799'
 
 output * subpixel rgb
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
-
-
-
-### Idle configuration
-#
-# Example configuration:
-exec swayidle -w \
-          timeout 60 '~/.config/sway/oled_off.sh timeout off' \
-            resume '~/.config/sway/oled_off.sh timeout on' \
-          timeout 600  'swaylock -f' \
-          before-sleep 'swaylock -f'
-
-### Input configuration
-#
-# Example configuration:
-#
-   input "1267:12737:ASUE120C:00_04F3:31C1_Touchpad" {
-       dwt enabled
-       tap enabled
-       natural_scroll enabled
-       middle_emulation enabled
-   }
-
-   input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "us,latam"
-   input "1:1:AT_Translated_Set_2_keyboard" xkb_options "grp:ctrl_space_toggle,caps:escape_shifted_capslock"
-   input "13364:640:Keychron_K8_Pro_Keyboard" xkb_layout "us,latam"
-   input "13364:640:Keychron_K8_Pro_Keyboard" xkb_options "grp:ctrl_space_toggle"
-   input "13364:640:Keychron_Keychron_K8_Pro" xkb_layout "us,latam" 
-   input "13364:640:Keychron_Keychron_K8_Pro" xkb_options "grp:ctrl_space_toggle"
+seat seat0 xcursor_theme Bibata-Modern-Amber 42
+seat * hide_cursor 7000
 
 input type:keyboard {
     repeat_delay 250
     repeat_rate 40
 }
 
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+input "1267:12737:ASUE120C:00_04F3:31C1_Touchpad" {
+   dwt enabled
+   tap enabled
+   natural_scroll enabled
+   middle_emulation enabled
+}
 
-bindsym $mod+Shift+t exec ~/.config/sway/tablet_map.sh
+input "1390:307:DEFT_Pro_TrackBall" {
+ scroll_button 279
+ scroll_button_lock enabled
+ scroll_method on_button_down
+ accel_profile adaptive
+ pointer_accel 0.3
+}
 
+input "13364:640:Keychron_K8_Pro_Mouse" {
+ accel_profile adaptive
+ pointer_accel 1.0
+}
 
-font pango:Droid Sans 10
-titlebar_border_thickness 1
-title_align center
-for_window [title="."] title_format '<span background="black">   %title   </span>'
-for_window [app_id="firefox"] inhibit_idle fullscreen
-for_window [app_id="chromium"] inhibit_idle fullscreen
+input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "us,latam"
+input "1:1:AT_Translated_Set_2_keyboard" xkb_options "grp:ctrl_space_toggle,caps:escape_shifted_capslock"
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+Shift+Return exec foot
+input "13364:640:Keychron_K8_Pro_Keyboard" xkb_layout "us,latam"
+input "13364:640:Keychron_K8_Pro_Keyboard" xkb_options "grp:ctrl_space_toggle"
+input "13364:640:Keychron_Keychron_K8_Pro" xkb_layout "us,latam" 
+input "13364:640:Keychron_Keychron_K8_Pro" xkb_options "grp:ctrl_space_toggle"
 
-    # Kill focused window
-    bindsym $mod+q kill
-    #bindsym Ctrl+Alt+Tab mark --add killme, exec zenity --question --text="¿Desea cerrar la ventana?" && swaymsg '[con_mark="killme"] kill'
-    # start your launcher
-    bindsym $mod+d exec $menu
-    bindsym $mod+x exec rofi -show drun 
-    bindsym $mod+c exec rofi -modes calc -show calc -no-show-match -no-sort
-    bindsym $mod+u exec ulauncher-toggle
-    bindsym $mod+Shift+z exec $term -e ranger 
-    bindsym $mod+Shift+m exec ~/.config/waybar/mpd.sh player
-    bindsym $mod+Shift+p exec foot -e pulsemixer 
-    bindsym $mod+n exec mousepad
-    bindsym $mod+z exec thunar
-    bindsym $mod+i exec $browser
-    bindsym $mod+Delete exec swaylock -f
-
-    bindsym $mod+o exec ~/.config/sway/oled_off.sh toggle
-    bindgesture swipe:down bar mode toggle
-    bindsym Ctrl+Alt+Tab bar hidden_state toggle 
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec zenity --question --text="¿Desea cerrar la sesión?" && swaymsg exit
-    bindsym $mod+m exec sway-marker mark
-    bindsym $mod+grave exec sway-marker goto
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-
-bindsym $mod+tab workspace next_on_output 
-bindsym $mod+Shift+tab workspace prev_on_output 
-bindsym $mod+end exec ~/.config/waybar/ws.sh next
-bindsym $mod+home exec ~/.config/waybar/ws.sh prev
-
-bindsym Mod1+tab exec ~/.config/sway/alttab next
-bindsym Mod1+shift+tab exec ~/.config/sway/alttab prev
-
-set $monitor 'ViewSonic Corporation VA2246 Series V1W184604799'
 
 workspace 1  output eDP-1 
 workspace 2  output $monitor
@@ -198,85 +58,150 @@ workspace 8  output $monitor
 workspace 9  output eDP-1 
 workspace 10  output $monitor
 
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+font pango:Droid Sans 10
+titlebar_border_thickness 1
+title_align center
+default_border pixel 2
+hide_edge_borders smart
+gaps inner 4
+smart_gaps on
+smart_borders on
+focus_follows_mouse yes
+focus_wrapping no
+# class                 border    backgr.   text    indicator child_border
+client.focused          #995fedaa #6a43b077 #ffffff #ffffff   #c168ffaa
+client.unfocused        #55555577 #13131377 #999999 #ffffff   #55555577
+client.focused_inactive #995fed77 #6a43b077 #aaaaaa #ffffff   #995fed77
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+for_window [title="."] title_format '<span background="black">   %title   </span>'
+for_window [app_id="cal"] floating enable, border normal, resize set 674 674
+for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
+for_window [app_id="iwdgui"] floating enable, border normal, resize set 464 603
+for_window [app_id="iwgtk"] floating enable, border normal, resize set 1000 600
+for_window [app_id="psensor"] floating enable, border normal, resize set 1000 600
+for_window [app_id="rofi"] border none, mark --add rofi
+for_window [app_id="ulauncher"] border none
+for_window [app_id="ymuse"] floating enable, border csd, resize set 1000 600
+for_window [app_id="Spot"] floating enable, border csd, resize set 1000 600
+for_window [app_id="pavucontrol"] floating enable, border csd, resize set 1000 600
+for_window [app_id="zenity"] floating enable, border csd, move position cursor
+for_window [title="Progreso de las operaciones de archivo"] floating enable, border normal, resize set 600 140
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen 
-    bindsym button2 exec wl-copy --primary --clear, kill
-    bindsym button3 border pixel 2 
-    bindsym button6 exec swaymsg move workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber - 2 ')
-    bindsym button7 exec swaymsg move workspace $(swaymsg -t get_workspaces | jq '.[] | select(.focused).name | tonumber + 2 ')
+floating_modifier $mod normal
 
-    bindsym --whole-window button9 fullscreen
-    bindsym --whole-window button8 border normal, floating toggle, resize set 1000 600
+bindgesture swipe:down bar mode toggle
+bindsym --whole-window BTN_TASK bar mode toggle
+bindsym button2 exec wl-copy --primary --clear, kill
+bindsym button3 border pixel 2, floating disable
+bindsym $mod+$down focus down
+bindsym $mod+$left focus left
+bindsym $mod+$right focus right
+bindsym $mod+$up focus up
+bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+a focus parent
+bindsym $mod+b splith
+bindsym $mod+c exec rofi -modes calc -show calc -no-show-match -no-sort
+bindsym $mod+d exec $menu
+bindsym $mod+Delete exec swaylock -f
+bindsym $mod+Down focus down
+bindsym $mod+e layout toggle split
+bindsym $mod+end exec ~/.config/waybar/ws.sh next
+bindsym $mod+f fullscreen 
+bindsym $mod+grave exec sway-marker goto
+bindsym $mod+greater exec playerctl next
+bindsym $mod+home exec ~/.config/waybar/ws.sh prev
+bindsym $mod+i exec $browser
+bindsym $mod+Left focus left
+bindsym $mod+less exec playerctl previous
+bindsym $mod+m exec sway-marker mark
+bindsym $mod+minus scratchpad show
+bindsym $mod+n exec mousepad
+bindsym $mod+o exec ~/.config/sway/oled_off.sh toggle
+bindsym $mod+p exec wlipman pick
+bindsym $mod+period border toggle
+bindsym $mod+Print exec find /home/neko/screenshots/ -type f | sort -r | xargs imv | tail -n 1 | xargs swappy -f 
+bindsym $mod+q kill
+bindsym $mod+Return exec $term
+bindsym $mod+Right focus right
+bindsym $mod+s layout stacking
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+a focus child
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+e exec zenity --question --text="¿Desea cerrar la sesión?" && swaymsg exit
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+m exec ~/.config/waybar/mpd.sh player
+bindsym $mod+Shift+minus border normal, move scratchpad
+bindsym $mod+Shift+n exec swaync-client -t -sw
+bindsym $mod+Shift+p exec foot -e pulsemixer 
+bindsym $mod+Shift+Return exec foot
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+space floating toggle, resize set 1000 600
+bindsym $mod+Shift+tab workspace prev_on_output 
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+w exec ~/.config/sway/wallpaper.sh
+bindsym $mod+Shift+z exec $term -e ranger 
+bindsym $mod+space focus mode_toggle
+bindsym $mod+tab workspace next_on_output 
+bindsym $mod+u exec ulauncher-toggle
+bindsym $mod+Up focus up
+bindsym $mod+v splitv
+bindsym $mod+w layout tabbed
+bindsym $mod+x exec rofi -show drun 
+bindsym $mod+z exec thunar
+bindsym Ctrl+Alt+Tab bar hidden_state toggle 
+bindsym Mod1+shift+tab exec ~/.config/sway/alttab prev
+bindsym Mod1+tab exec ~/.config/sway/alttab next
+bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/home/neko/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym XF86MonBrightnessDown exec light -U 0.25
+bindsym XF86MonBrightnessUp exec light -A 0.25
+bindsym XF86TouchpadToggle input 1267:12737:ASUE120C:00_04F3:31C1_Touchpad events toggle enabled disabled
 
-    bindsym $mod+period border toggle
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle, resize set 1000 600
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
-
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-    bindsym $mod+Shift+a focus child
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus border normal, move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 
-    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
-
-
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar bar-0 {
    swaybar_command waybar
 }
@@ -288,67 +213,13 @@ bar bar-1 {
    modifier Mod4
    position top
 }
-for_window [app_id="zenity"] floating enable, border csd, move position cursor
-for_window [app_id="foot"] floating enable, border normal, resize set 1000 600
-for_window [app_id="psensor"] floating enable, border normal, resize set 1000 600
-for_window [app_id="iwgtk"] floating enable, border normal, resize set 1000 600
-for_window [app_id="ymuse"] floating enable, border csd, resize set 1000 600
-for_window [app_id="iwdgui"] floating enable, border normal, resize set 464 603
-for_window [app_id="cal"] floating enable, border normal, resize set 674 674
-for_window [title="Progreso de las operaciones de archivo"] floating enable, border normal, resize set 600 140
-
-for_window [app_id="rofi"] border none, mark --add rofi
-for_window [app_id="ulauncher"] border none
-
-default_border pixel 2
-hide_edge_borders smart
-gaps inner 4
-smart_gaps on
-smart_borders on
-focus_follows_mouse yes
-focus_wrapping no
-
-# class                 border    backgr.   text    indicator child_border
-client.focused          #995fedaa #6a43b077 #ffffff #ffffff   #c168ffaa
-client.unfocused        #55555577 #13131377 #999999 #ffffff   #55555577
-client.focused_inactive #995fed77 #6a43b077 #aaaaaa #ffffff   #995fed77
-
-exec swaync
-
+exec_always kanshictl reload
 exec blueman-applet
 exec udiskie --no-automount --tray --appindicator
 exec ulauncher --hide-window
-
 exec wl-paste -t text --watch wlipman store
 
-exec gammastep -v -l 4.6:-73.9
-exec swww init
-
-bindsym $mod+Shift+w exec ~/.config/sway/wallpaper.sh
-
- bindsym $mod+p exec wlipman pick
- bindsym $mod+Shift+n exec swaync-client -t -sw
- bindsym Print exec grim -c -g "$(slurp)" -t png - | tee "/home/neko/screenshots/ss_$(date +%s).png" | wl-copy -t image/png
- bindsym $mod+Print exec find /home/neko/screenshots/ -type f | sort -r | xargs imv | tail -n 1 | xargs swappy -f 
- bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
- bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
- bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
- bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
- bindsym XF86AudioPlay exec playerctl play-pause
- bindsym XF86AudioNext exec playerctl next
- bindsym $mod+greater exec playerctl next
- bindsym XF86AudioPrev exec playerctl previous
- bindsym $mod+less exec playerctl previous
- bindsym XF86MonBrightnessDown exec light -U 0.25
- bindsym XF86MonBrightnessUp exec light -A 0.25
- bindsym XF86TouchpadToggle input 1267:12737:ASUE120C:00_04F3:31C1_Touchpad events toggle enabled disabled
-
-# seat wacom attach 1386:890:Wacom_One_by_Wacom_S_Pen
-# seat wacom xcursor_theme Bibata-Modern-Ice 42
-# seat wacom idle_inhibit tablet_tool
-
- seat seat0 xcursor_theme Bibata-Modern-Amber 42
- seat * hide_cursor 7000
-exec kanshi
-exec ~/.config/sway/walltimer.sh 600
 include /etc/sway/config.d/*
+exec systemd-notify --ready
+exec_always systemctl --user start sway-session.target
+

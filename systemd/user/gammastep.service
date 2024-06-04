@@ -1,0 +1,10 @@
+[Unit]
+Description=Gamma Step
+BindsTo=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=gammastep -v -l 4.6:-73.9
+
+[Install]
+WantedBy=sway-session.target

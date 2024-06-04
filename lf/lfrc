@@ -33,8 +33,6 @@ map ` !true
 map x $$f
 map X !$f
 
-map S $zsh
-
 # dedicated keys for file opener actions
 map o &mimeopen $f
 map O $mimeopen --ask $f

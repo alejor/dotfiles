@@ -1,0 +1,13 @@
+[Unit]
+Description=Swayidle to trigger idle actions
+Documentation=man:swayidle(1)
+PartOf=graphical-session.target
+After=sway.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/swayidle -w timeout 5 "~/.config/sway/idle.sh catnap" resume "~/.config/sway/idle.sh kick" timeout 100 "~/.config/sway/oled_off.sh timeout off" resume "~/.config/sway/oled_off.sh timeout on" timeout 900 'swaylock -f' before-sleep 'swaylock -f'
+ExecStopPost=/home/neko/.config/sway/idle.sh reset
+
+[Install]
+WantedBy=sway-session.target

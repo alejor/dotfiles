@@ -1,7 +1,7 @@
 colorscheme cyanide
 add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
 add-highlighter global/ show-matching
-add-highlighter global/ wrap -word -indent
+# add-highlighter global/ wrap -word -indent
 set-option global tabstop 2
 set-option global indentwidth 2
 set-option global scrolloff 3,3
@@ -20,6 +20,8 @@ plug "evanrelf/byline.kak" config %{
   require-module "byline"
 }
 
+plug "eraserhd/kak-ansi" 
+
 plug "andreyorst/powerline.kak" defer powerline_zenburn %{
     powerline-theme zenburn
 } config %{
@@ -27,7 +29,6 @@ plug "andreyorst/powerline.kak" defer powerline_zenburn %{
 }
 hook global InsertCompletionShow .* %{
   try %{
-    # this command temporarily removes cursors preceded by whitespace; # if there are no cursors left, it raises an error, does not # continue to execute the mapping commands, and the error is eaten # by the `try` command so no warning appears.
     execute-keys -draft 'h<a-K>\h<ret>'
     map window insert <tab> <c-n>
     map window insert <s-tab> <c-p>
@@ -54,3 +55,7 @@ define-command -override my-surround-add -params 2 %{
   }
 }
 
+eval %sh{kak-lsp --kakoune -s $kak_session}  # Not needed if you load it with plug.kak.
+hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+    lsp-enable-window
+}

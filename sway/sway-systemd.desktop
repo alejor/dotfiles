@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Sway Service
+Comment=Start sway via systemd
+Exec=systemctl --wait --user start sway.service
+Type=Application
